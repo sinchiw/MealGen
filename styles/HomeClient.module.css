@@ -1,0 +1,68 @@
+.page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 64px 20px;
+  background: #f3f3f3;
+}
+
+.blobTopLeft,
+.blobBottomRight {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  filter: blur(50px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blobTopLeft {
+  top: -220px;
+  left: -220px;
+  background: radial-gradient(circle, #a8c7a7 0%, transparent 65%);
+}
+
+.blobBottomRight {
+  bottom: -240px;
+  right: -240px;
+  background: radial-gradient(circle, #a8c7a7 0%, transparent 65%);
+}
+
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  z-index: 1;
+}
+
+.panel {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  padding: 46px 44px 34px;
+}
+
+.title {
+  margin: 0 0 26px;
+  text-align: center;
+  font-size: 52px;
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+  font-weight: 700;
+  color: #2a2a2a;
+}
+
+.controls {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.loading {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}

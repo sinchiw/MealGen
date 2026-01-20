@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import IngredientInput from "../components/IngredientInput";
-import IngredientChips from "../components/IngredientChips";
 import GenerateButton from "../components/GenerateButton";
 import RecipeList from "../components/RecipeList";
 import { getRecipes } from "./actions/recipes";
 import type { Recipe } from "../types";
+import styles from "../styles/HomeClient.module.css";
 
 export default function HomeClient() {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -14,9 +14,12 @@ export default function HomeClient() {
   const [loading, setLoading] = useState(false);
 
   const addIngredient = (ingredient: string) => {
-    if (!ingredients.includes(ingredient)) {
-      setIngredients([...ingredients, ingredient]);
-    }
+    const next = ingredient.trim();
+    if (!next) return;
+
+    const normalized = next.toLowerCase();
+    const exists = ingredients.some((i) => i.toLowerCase() === normalized);
+    if (!exists) setIngredients([...ingredients, next]);
   };
 
   const removeIngredient = (ingredient: string) => {
@@ -38,22 +41,32 @@ export default function HomeClient() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Recipe Generator</h1>
+    <div className={styles.page}>
+      <div className={styles.blobTopLeft} aria-hidden="true" />
+      <div className={styles.blobBottomRight} aria-hidden="true" />
 
-      <IngredientInput onAddIngredient={addIngredient} />
-      <IngredientChips
-        ingredients={ingredients}
-        onRemoveIngredient={removeIngredient}
-      />
+      <div className={styles.shell}>
+        <div className={styles.panel}>
+          <h1 className={styles.title}>Recipe Generator</h1>
 
-      <GenerateButton
-        onClick={generateRecipes}
-        disabled={ingredients.length === 0 || loading}
-      />
+          <div className={styles.controls}>
+            <IngredientInput
+              ingredients={ingredients}
+              onAddIngredient={addIngredient}
+              onRemoveIngredient={removeIngredient}
+            />
 
-      {loading && <p>Loading recipes...</p>}
-      <RecipeList recipes={recipes} />
+            <GenerateButton
+              onClick={generateRecipes}
+              disabled={ingredients.length === 0 || loading}
+            />
+
+            {loading && <div className={styles.loading}>Loading recipes...</div>}
+          </div>
+
+          <RecipeList recipes={recipes} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,20 +1,24 @@
 .button {
-  margin-top: 1rem;
-  padding: 0.7rem 1.2rem;
+  padding: 12px 28px;
   border: none;
-  background-color: #ff7f50;
-  color: white;
+  border-radius: 10px;
+  background: #6f8f6b;
+  color: #fff;
   font-size: 16px;
-  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  box-shadow: 0 10px 20px rgba(111, 143, 107, 0.25);
+  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
 .button:hover {
-  background-color: #ff6333;
+  filter: brightness(0.98);
+  transform: translateY(-1px);
 }
 
 .button:disabled {
-  background-color: #ccc;
+  opacity: 0.55;
   cursor: not-allowed;
+  transform: none;
 }
