@@ -7,8 +7,22 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.14);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
+.card:active {
+  transform: translateY(-2px);
+}
 .media {
   position: relative;
   height: 210px;
