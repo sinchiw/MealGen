@@ -8,6 +8,9 @@ interface Recipe {
   image: string;
   usedIngredients: string[];
   missedIngredients: string[];
+  calories: number;
+  readyInMinutes: number;
+  difficulty: number;
 }
 
 interface RecipeListProps {
