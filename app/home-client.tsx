@@ -51,12 +51,12 @@ export default function HomeClient() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.blobTopLeft} aria-hidden="true" />
-      <div className={styles.blobBottomRight} aria-hidden="true" />
-
       <div className={styles.shell}>
         <div className={styles.panel}>
           <h1 className={styles.title}>Recipe Generator</h1>
+          <h2 className={styles.subtitle}>
+            Type an ingredient and press Enter to add it to your list
+          </h2>
 
           <div className={styles.controls}>
             <IngredientInput
