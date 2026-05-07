@@ -4,7 +4,7 @@ import { useState } from "react";
 import IngredientInput from "../components/IngredientInput";
 import GenerateButton from "../components/GenerateButton";
 import RecipeList from "../components/RecipeList";
-import { getRecipes } from "./actions/recipes";
+
 import type { Recipe } from "../types";
 import styles from "../styles/HomeClient.module.css";
 
@@ -30,11 +30,20 @@ export default function HomeClient() {
     if (ingredients.length === 0) return;
 
     setLoading(true);
+
     try {
-      const data = await getRecipes(ingredients);
+      const query = encodeURIComponent(ingredients.join(","));
+
+      const res = await fetch(`/api/recipes?ingredients=${query}`);
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch recipes");
+      }
+
+      const data = await res.json();
       setRecipes(data);
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -61,7 +70,9 @@ export default function HomeClient() {
               disabled={ingredients.length === 0 || loading}
             />
 
-            {loading && <div className={styles.loading}>Loading recipes...</div>}
+            {loading && (
+              <div className={styles.loading}>Loading recipes...</div>
+            )}
           </div>
 
           <RecipeList recipes={recipes} />

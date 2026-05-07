@@ -6,6 +6,9 @@ interface RecipeCardProps {
   image: string;
   usedIngredients: string[];
   missedIngredients: string[];
+  calories: number;
+  readyInMinutes: number;
+  difficulty: number;
 }
 
 function IngredientPill({
@@ -16,7 +19,9 @@ function IngredientPill({
   variant: "good" | "bad";
 }) {
   return (
-    <span className={`${styles.pill} ${variant === "good" ? styles.good : styles.bad}`}>
+    <span
+      className={`${styles.pill} ${variant === "good" ? styles.good : styles.bad}`}
+    >
       <span className={styles.pillIcon}>{variant === "good" ? "✓" : "×"}</span>
       {label}
     </span>
@@ -28,6 +33,9 @@ export default function RecipeCard({
   image,
   usedIngredients,
   missedIngredients,
+  calories,
+  readyInMinutes,
+  difficulty,
 }: RecipeCardProps) {
   return (
     <div className={styles.card}>
@@ -37,6 +45,11 @@ export default function RecipeCard({
 
       <div className={styles.body}>
         <h3 className={styles.name}>{title}</h3>
+        <div className={styles.recipeOverview}>
+          <p>🔥 {calories} kcal</p>
+          <p>⏱ {readyInMinutes} min</p>
+          <p>👨‍🍳 {difficulty} Easy</p>
+        </div>
 
         <div className={styles.pills}>
           {usedIngredients.slice(0, 3).map((ing) => (
